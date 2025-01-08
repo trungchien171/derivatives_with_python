@@ -11,7 +11,6 @@ mpl.rcParams['font.family'] = 'serif'
 # Helper Function
 #
 
-
 def dN(x, mu, sigma):
     ''' Probability density function of a normal random variable x.
 
@@ -30,7 +29,6 @@ def dN(x, mu, sigma):
     z = (x - mu) / sigma
     pdf = np.exp(-0.5 * z ** 2) / math.sqrt(2 * math.pi * sigma ** 2)
     return pdf
-
 
 #
 # Simulate a Number of Years of Daily Stock Quotes
@@ -66,7 +64,7 @@ def simulate_gbm():
     gbm['returns'] = np.log(gbm['index'] / gbm['index'].shift(1))
 
     # Realized Volatility (eg. as defined for variance swaps)
-    gbm['rea_var'] = 252 * np.cumsum(gbm['returns'] ** 2) / np.arange(len(gbm))
+    gbm['rea_var'] = 252 * np.cumsum(gbm['returns'] ** 2) / np.arange(1, len(gbm)+1)
     gbm['rea_vol'] = np.sqrt(gbm['rea_var'])
     gbm = gbm.dropna()
     return gbm
